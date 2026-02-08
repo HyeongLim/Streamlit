@@ -1,0 +1,7 @@
+numpy
+matplotlib
+pandas
+scipy
+arviz
+seaborn
+streamlit==>=1.53
