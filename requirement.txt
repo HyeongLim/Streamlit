@@ -4,4 +4,6 @@ pandas
 scipy
 arviz
 seaborn
+netCDF4
+h5netcdf
 streamlit==>=1.53
