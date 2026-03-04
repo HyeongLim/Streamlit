@@ -4,4 +4,6 @@ pandas
 scipy
 arviz
 seaborn
+xarray
 streamlit>=1.53
+
