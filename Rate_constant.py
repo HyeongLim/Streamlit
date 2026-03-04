@@ -4,7 +4,7 @@ import arviz as az
 import seaborn as sns
 import matplotlib.pyplot as plt
 import streamlit as st
-
+import os
 from scipy import stats
 from scipy.stats import gaussian_kde
 
@@ -12,9 +12,30 @@ plt.rcParams["font.family"] = "Times New Roman"
 plt.rcParams["mathtext.fontset"] = "stix"
 
 
+#@st.cache_data
+#def load_posterior():
+#    return az.from_netcdf("posterior.nc")
+
 @st.cache_data
 def load_posterior():
-    return az.from_netcdf("posterior.nc")
+    """
+    Load posterior NetCDF safely with explicit engine and path handling.
+    """
+
+    file_path = os.path.join(os.path.dirname(__file__), "posterior.nc")
+
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(
+            f"posterior.nc not found at: {file_path}"
+        )
+
+    try:
+        return az.from_netcdf(file_path, engine="netcdf4")
+    except Exception as e:
+        raise RuntimeError(
+            f"Failed to load posterior.nc. Ensure netcdf4 is installed.\n{e}"
+        )
+
 
 
 def compute_predicted_log_lambda_with_no_uncertain_fe_content(posterior, fe_content, seed=42):
@@ -170,4 +191,5 @@ if run:
     st.dataframe(stats_df, use_container_width=True)
 
     st.subheader("Half-life Estimate")
+
     st.dataframe(half_life_df, use_container_width=True)
