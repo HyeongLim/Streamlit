@@ -487,25 +487,25 @@ if st.session_state.field is not None:
     xs, ys, C = field["xs"], field["ys"], field["C"]
 
     with st.expander("Concentration Grid Data"):
-    xs = field["xs"]
-    ys = field["ys"]
-    C = field["C"]
-
-    # Build labeled matrix
-    # First row: ["y\\x", x1, x2, x3, ...]
-    header = ["y\\x"] + [f"{x:.4f}" for x in xs]
-
-    # Each subsequent row: [y_j, C[j,0], C[j,1], ...]
-    table = []
-    for j, y in enumerate(ys):
-        row = [f"{y:.4f}"] + [f"{C[j,i]:.4f}" for i in range(len(xs))]
-        table.append(row)
-
-    # Display as a dataframe
-    st.dataframe(
-        pd.DataFrame(table, columns=header),
-        use_container_width=True
-    )
+        xs = field["xs"]
+        ys = field["ys"]
+        C = field["C"]
+    
+        # Build labeled matrix
+        # First row: ["y\\x", x1, x2, x3, ...]
+        header = ["y\\x"] + [f"{x:.4f}" for x in xs]
+    
+        # Each subsequent row: [y_j, C[j,0], C[j,1], ...]
+        table = []
+        for j, y in enumerate(ys):
+            row = [f"{y:.4f}"] + [f"{C[j,i]:.4f}" for i in range(len(xs))]
+            table.append(row)
+    
+        # Display as a dataframe
+        st.dataframe(
+            pd.DataFrame(table, columns=header),
+            use_container_width=True
+        )
 
 if len(st.session_state.cs_sets) > 0:
     with st.expander("Cross Section Data"):
@@ -513,5 +513,6 @@ if len(st.session_state.cs_sets) > 0:
             st.write(f"**{cs['label']}**")
             st.write("Coordinate, Concentration")
             st.write(np.column_stack([cs["x"], cs["c"]]))
+
 
 
