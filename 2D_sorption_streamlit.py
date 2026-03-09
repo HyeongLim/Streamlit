@@ -347,9 +347,9 @@ def get_curve_color(idx):
 # Streamlit App
 # ============================================================
 
-st.set_page_config(page_title="Domenico Streamlit Tool (2D)", layout="wide")
+st.set_page_config(page_title="2D Equilibrium Sorption with 1st Order Decay", layout="wide")
 
-st.title("Domenico Transport Model (2D, Streamlit Version)")
+st.title("2D Equilibrium Sorption with 1st Order Decay")
 
 # Session state for field and cross sections
 if "field" not in st.session_state:
@@ -500,3 +500,4 @@ if len(st.session_state.cs_sets) > 0:
             st.write(f"**{cs['label']}**")
             st.write("Coordinate, Concentration")
             st.write(np.column_stack([cs["x"], cs["c"]]))
+
