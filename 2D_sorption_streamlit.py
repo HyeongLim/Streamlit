@@ -297,7 +297,7 @@ def plot_concentration_field(xs, ys, C, C0):
         aspect="auto",
         vmin=0.0,
         vmax=1.0,
-        cmap="viridis",
+        cmap="jet",
     )
     ax.set_xlabel("X")
     ax.set_ylabel("Y")
